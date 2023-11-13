@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spelling Bee Training App</title>
+</head>
+<body>
+
+<script>
+    // List of words (you can modify this list with your words)
+    var words = ["abbreviate", "abdicate", "abode",
+    "abstraction", "abundant", "abusive",
+    "abyss", "accomplice", "accordion",
+    "accumulate", "acerbate", "acetone",
+    "acme", "acolyte", "acoustic",
+    "acquittal", "acumen", "adequacy",
+    "adroitness", "advocate", "affidavit",
+    "affluent", "aggregate", "agitation",
+    "agriculture", "agronomy", "aisle",
+    "alabaster", "alkaline", "allay",
+    "allegory", "alleviate", "alliance",
+    "alligator", "alloy", "alluvium",
+    "almanac", "alpinist", "alteration",
+    "amateur", "ambrosia", "amiable",
+    "analyze", "anarchy", "anchovy",
+    "angstroms", "anomaly", "antenna",
+    "antics", "antonym", "anxiety",
+    "aortic", "appreciate", "arrogance",
+    "arsenal", "aspersion", "austere",
+    "axiom", "bachelor", "bailiff",
+    "basalt", "basilica", "bastion",
+    "battalion", "bauble", "bayonet",
+    "bayou", "beatific", "bedazzle",
+    "behemoth", "beneficence", "beret",
+    "berserk", "betrothal", "bevy",
+    "bibelot", "bifurcate", "bilious",
+    "blatant", "blithe", "blunder",
+    "boar", "bogus", "boloney",
+    "bolshevism", "bonhomie", "brogan",
+    "brouhaha", "buoyant", "bureaucracy",
+    "burgundy", "buttress",
+    "cachet", "calibrate", "calypso",
+    "candor", "caramel", "carbine",
+    "careen", "caribou", "caricature",
+    "castanets", "cathartic", "cauliflower",
+    "chambray", "champagne", "chapeau",
+    "charisma", "chateau", "chic",
+    "chimera", "chivalry", "choreographer",
+    "chromatic", "cicada", "clairvoyance",
+    "clavicle", "clemency", "coincidence",
+    "collage", "collateral", "colloquial",
+    "cologne", "colossal", "comatose",
+    "concierge", "confabulate", "confetti",
+    "confidence", "conspiracy", "constraint",
+    "construe", "consultant", "contagious",
+    "contempt", "contour", "contradict",
+    "contrary", "contrive", "convoluted",
+    "corrupt", "countenance", "covenant",
+    "cranium", "crimson", "crotchety",
+    "crucible", "cruelty", "crypt",
+    "cuckoo", "cyanide", "dazzle",
+    "declination", "decrepit", "delirious",
+    "delta", "despotism", "deterrent",
+    "detonate", "detriment", "dexterous",
+    "dichotomy", "diesel", "digit",
+    "disintegration", "dismantle", "disquietude",
+    "dissident", "distraught", "diversify",
+    "dormancy", "dour", "druid",
+    "ductile", "dungeon", "duplicate",
+    "duress", "elocution", "elysian",
+    "emancipation", "embassy", "embellish",
+    "embodiment", "embryonic", "emollient",
+    "emphasis", "emphatic", "emporium",
+    "emulate", "enamel", "endorse",
+    "enmity", "enthusiasm", "enumerate",
+    "environment", "epidermis", "equanimity",
+    "equestrian", "equivocation", "erratic",
+    "espionage", "ethnic", "euphoric",
+    "exaggerate", "exhilarated", "exhume",
+    "exigent", "exodus", "exotic",
+    "expatriate", "expertise", "expatiate",
+    "explicit", "exponential", "extinguish",
+    "extortion", "extraneous", "fabricate",
+    "facile", "factitious", "falderal",
+    "fallacy", "feasible", "fedora",
+    "felicitation", "femur", "ferocity",
+    "festoon", "fidelity", "filament",
+    "filibuster", "finesse", "flagrant",
+    "flourish", "fluctuate", "fluid",
+    "flummery", "foppish", "forfeit",
+    "formulation", "forte", "fractious",
+    "fragility", "franchise", "fraternize",
+    "friar", "frivolous", "frugal",
+    "fumigate", "galaxy", "galleon",
+    "garlic", "garrison", "garrote",
+    "gauche", "gendarme", "germane",
+    "ghastly", "gladiator", "globule",
+    "googol", "gossamer", "gradient",
+    "graffiti", "gratitude", "gravitate",
+    "grievance", "guarantee", "hacienda",
+    "halcyon", "harbinger", "haughtily",
+    "heifer", "heirloom", "hemisphere",
+    "hermit", "hilarity", "homburg",
+    "hooligan", "horde", "howitzer",
+    "huckleberry", "humorous", "hurricane",
+    "hyphenate", "hysterical", "icicle",
+    "igneous", "ignominy", "immaculate",
+    "impasse", "impassive", "impenetrable",
+    "impertinent", "impromptu", "impropriety",
+    "improvisational", "impulse", "inaugural",
+    "incendiary", "incisiveness", "incoherent",
+    "incongruous", "incredulous", "indelible",
+    "indigent", "indivisible", "indolent",
+    "indulgent", "inept", "infatuation",
+    "infectious", "innate", "inorganic",
+    "interference", "interrogate", "intimidate",
+    "intrepid", "jaundice", "jeopardy",
+    "jettison", "jocund", "jostle",
+    "jubilant", "kerosene", "kinesiology",
+    "knavery", "kudos", "lambaste",
+    "languid", "lantern", "larceny",
+    "largesse", "lassitude", "league",
+    "legume", "lightning", "liturgy",
+    "loafer", "loathe", "lobster",
+    "localize", "lubricate", "lucrative",
+    "lummox", "luster", "macabre",
+    "magenta", "magisterial", "malediction",
+    "malicious", "malleable", "mandible",
+    "manganese", "mantilla", "marathon",
+    "marionette", "marzipan", "massacre",
+    "masticate", "mauve", "mediocre",
+    "melancholy", "melanoma", "meliorate",
+    "metamorphosis", "migratory", "mimeograph",
+    "mimic", "miscellaneous", "misconception",
+    "miserable", "mitigate", "monotonous",
+    "multiplier", "nectar", "negativism",
+    "negligence", "nettlesome", "neurologist",
+    "nocuous", "nomad", "nomenclature",
+    "nonchalant", "notorious", "nourishment",
+    "nullify", "oblivion", "occupancy",
+    "occurrence", "ocelot", "odious",
+    "odometer", "officious", "ointment",
+    "oligarchy", "onus", "optimistic",
+    "oscillation", "ostrich", "outrageous",
+    "oxidize", "oxymoron", "pachyderm",
+    "palaver", "palfrey", "palooka",
+    "panache", "paprika", "paralyze",
+    "parenthesis", "pastry", "pathetic",
+    "patrician", "patriotism", "pavilion",
+    "peccadillo", "pecuniary", "pedigree",
+    "peculate", "pellucid", "peninsula",
+    "penury", "perceptible", "perennial",
+    "perilous", "perpetrator", "perplex",
+    "pertinence", "peruse", "pessimistic",
+    "pheasant", "piteous", "placard",
+    "placid", "plateau", "platitude",
+    "plausible", "plebeian", "plenitude",
+    "pliancy", "plutonic", "pneumatic",
+    "podiatrist", "poignant", "poltroon",
+    "polymer", "pomegranate", "pomposity",
+    "porcelain", "portentous", "posthumous",
+    "postulate", "pragmatic", "praline",
+    "precipitation", "predator", "predecessor",
+    "predicament", "predilection", "premonition",
+    "primitive", "privy", "procrastinate",
+    "procurement", "prodigal", "progeny",
+    "prognosis", "prologue", "promontory",
+    "prompt", "pronouncement", "propaganda",
+    "propolis", "prosaic", "protoplasm",
+    "psyche", "pugilist", "pullet",
+    "pulpit", "pursuit", "purulence",
+    "purveyor", "queasy", "quench",
+    "querulous", "quintet", "quintuplet",
+    "quorum", "raiment", "rampant",
+    "ramshackle", "raspberry", "reassurance",
+    "receptacle", "rectitude", "redolent",
+    "regalia", "regurgitate", "remnant",
+    "renegade", "repatriate", "repertoire",
+    "reprisal", "reprobate", "requiem",
+    "residue", "resonance", "restitution",
+    "reticence", "retrieval", "rhetoric",
+    "rheumatic", "rhizome", "rhythm",
+    "ridiculous", "rigorous", "risotto",
+    "sabotage", "sacrifice", "satirical",
+    "sayonara", "scaffold", "scald",
+    "sciatica", "scrawny", "selenium",
+    "sentry", "sepia", "serviceable",
+    "shrapnel", "shrewd", "siege",
+    "simulate", "sinew", "singular",
+    "sirloin", "skirmish", "sojourn",
+    "solemn", "sorcerer", "souvenir",
+    "spasmodic", "spatula", "spigot",
+    "sporadic", "squalid", "stagnant",
+    "stalwart", "stenography", "stevedore",
+    "strafe", "strategy", "stratocumulus",
+    "strictly", "stroganoff", "sublimation",
+    "subservience", "subsidiary", "sumo",
+    "superstition", "suspensory", "suspiciously",
+    "syndrome", "tabernacle", "talisman",
+    "tarantula", "tenacious", "testimony",
+    "theatrical", "therapeutic", "thievery",
+    "threshold", "timbre", "timorous",
+    "topaz", "tragedy", "tranquilizer",
+    "transparent", "treacherous", "trepidation",
+    "triceratops", "trough", "turban",
+    "turbulence", "turret", "tutelage",
+    "typhoid", "ulcerated", "ullage",
+    "ultimatum", "ululate", "umbrage",
+    "upholstery", "urbane", "urgency",
+    "usurer", "usurper", "utility",
+    "utopian", "valedictory", "vandalism",
+    "velocity", "vestibule", "veterans",
+    "viable", "vigil", "vindicate",
+    "virago", "viscera", "viscous",
+    "visualization", "vocalize", "vocation",
+    "vogue", "volunteer", "voracity",
+    "vortex", "vulgarity", "vulpine",
+    "wainscot", "wallop", "waltz",
+    "wampum", "weevil", "wheelbarrow",
+    "whimsical", "wizardry", "wreckage",
+    "wrought", "yearling", "zealot",
+    "zeppelin", "zilch", "zodiac",
+    "zoologist", "zwieback", "zygote",
+    "zymurgy"
+];
+
+    // Shuffle the list of words to randomize the order
+    function shuffleArray(array) {
+        for (var i = array.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+    }
+
+    shuffleArray(words);
+
+    // Count of the number of words done in the session
+    var count = 0;
+
+    var wordToDisplay = null;
+
+    function getRandomWord() {
+        if (words.length > 0) {
+            wordToDisplay = words.pop();
+        } else {
+            wordToDisplay = "No words left";
+        }
+    }
+
+    function readAloud() {
+        if (wordToDisplay !== null && wordToDisplay !== "No words left") {
+            // Implement text-to-speech functionality here
+            var speechSynthesis = window.speechSynthesis;
+            var speechText = new SpeechSynthesisUtterance(wordToDisplay);
+            speechSynthesis.speak(speechText);
+        }
+    }
+
+    function displayWord() {
+        var label = document.getElementById("wordLabel");
+        var countLabel = document.getElementById("countLabel");
+        label.innerText = wordToDisplay;
+        count += 1;
+        countLabel.innerText = count;
+    }
+
+    // Bind keys to functions
+    document.addEventListener("keydown", function (event) {
+        if (event.key === " ") {
+            getRandomWord();
+        } else if (event.key === "m") {
+            readAloud();
+        } else if (event.key === "n") {
+            displayWord();
+        }
+    });
+
+    // Initial display
+    getRandomWord();
+</script>
+
+<div style="text-align: center;">
+    <h1>Spelling Bee Training App</h1>
+    <p id="wordLabel" style="font-size: 24px;"></p>
+    <button onclick="getRandomWord()">Get Word</button>
+    <button onclick="readAloud()">Read Aloud</button>
+    <button onclick="displayWord()">Finished</button>
+    <p>Words Done: <span id="countLabel">0</span></p>
+</div>
+
+</body>
+</html>
